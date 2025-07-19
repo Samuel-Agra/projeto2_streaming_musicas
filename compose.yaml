@@ -1,0 +1,17 @@
+services:
+  mysql:
+    image: 'mysql:8.1'
+    container_name: db
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql # leia instructions.txt
+      - vol_music:/var/lib/mysql
+    environment:
+      - 'MYSQL_DATABASE=db_music'
+      - 'MYSQL_ROOT_PASSWORD=root123'
+      - 'MYSQL_USER=usuario'
+      - 'MYSQL_PASSWORD=usuario123'
+    ports:
+      - '3306:3306'
+volumes:
+  vol_music:
+    name: "vol_music"
