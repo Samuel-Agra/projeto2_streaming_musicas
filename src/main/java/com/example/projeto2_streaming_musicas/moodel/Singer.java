@@ -41,6 +41,10 @@ public class Singer {
         this.birthDate = birthDate;
     }
 
+    public Singer() {
+        
+    }
+
     public Long getId() {
         return id;
     }
