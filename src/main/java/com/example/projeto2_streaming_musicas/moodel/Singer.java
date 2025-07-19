@@ -42,7 +42,7 @@ public class Singer {
     }
 
     public Singer() {
-        
+
     }
 
     public Long getId() {
