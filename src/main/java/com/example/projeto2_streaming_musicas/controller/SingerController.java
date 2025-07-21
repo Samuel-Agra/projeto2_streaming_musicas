@@ -3,6 +3,7 @@ package com.example.projeto2_streaming_musicas.controller;
 import com.example.projeto2_streaming_musicas.moodel.Singer;
 import com.example.projeto2_streaming_musicas.service.SingerService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import java.util.Optional;
 @Controller
 public class SingerController {
 
+    @Autowired
     private final SingerService singerService;
 
     public SingerController(SingerService singerService, SingerService singerService1) {
