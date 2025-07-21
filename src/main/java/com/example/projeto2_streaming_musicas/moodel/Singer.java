@@ -30,7 +30,7 @@ public class Singer {
     @Column(name = "LAST_NAME", nullable = false, length = 250)
     private String lastName;
 
-    @Past ( message = "Date must be in the past date" )
+    @Past ( message = "Date must be a past date" )
     @NotNull
     @Column(name = "BIRTH_DATE", nullable = false)
     private LocalDate birthDate;
