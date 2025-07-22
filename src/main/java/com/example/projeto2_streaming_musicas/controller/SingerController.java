@@ -82,7 +82,7 @@ public class SingerController {
             updatedSinger.setBirthDate(singer.getBirthDate());
             singerService.addSinger(updatedSinger);
         }
-        return "redirect:/singer"; // Redirect after updating
+        return "redirect:/singer";
     }
 
 }
