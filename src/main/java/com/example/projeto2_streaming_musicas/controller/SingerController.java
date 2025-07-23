@@ -1,10 +1,9 @@
 package com.example.projeto2_streaming_musicas.controller;
 
-import com.example.projeto2_streaming_musicas.moodel.Singer;
+import com.example.projeto2_streaming_musicas.model.Singer;
 import com.example.projeto2_streaming_musicas.service.SingerService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,17 +36,18 @@ public class SingerController {
     }
 
     @GetMapping ( "/singers/add" )
-    public String addSinger(){
-        return "add_Singer";
+    public String showAddForm(Model model) {
+        model.addAttribute("singer", new Singer());
+        return "add_singer";
     }
 
     @PostMapping ( "/singers/add" )
     public String addSinger(@Valid @ModelAttribute Singer singer, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "add_Singer";
+            return "add_singer";
         }
         singerService.addSinger( singer );
-        return "singers";
+        return "redirect:/singers";
     }
 
     @GetMapping ( "/singers/delete/{id}" )
@@ -68,7 +68,7 @@ public class SingerController {
 
     @PostMapping ( "/singer/edit/{id}" )
     public String updateBook(@PathVariable("id") Long id,
-                             @Valid @ModelAttribute("book") Singer singer,
+                             @Valid @ModelAttribute("singer") Singer singer,
                              BindingResult result) {
         if (result.hasErrors()) {
             return "editSinger";

@@ -1,6 +1,6 @@
 package com.example.projeto2_streaming_musicas.service;
 
-import com.example.projeto2_streaming_musicas.moodel.Singer;
+import com.example.projeto2_streaming_musicas.model.Singer;
 import com.example.projeto2_streaming_musicas.repository.SingerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

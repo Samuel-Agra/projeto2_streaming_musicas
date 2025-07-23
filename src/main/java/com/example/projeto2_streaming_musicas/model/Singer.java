@@ -1,12 +1,10 @@
-package com.example.projeto2_streaming_musicas.moodel;
+package com.example.projeto2_streaming_musicas.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 
 import java.time.LocalDate;
 

@@ -1,6 +1,6 @@
 package com.example.projeto2_streaming_musicas.repository;
 
-import com.example.projeto2_streaming_musicas.moodel.Singer;
+import com.example.projeto2_streaming_musicas.model.Singer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
