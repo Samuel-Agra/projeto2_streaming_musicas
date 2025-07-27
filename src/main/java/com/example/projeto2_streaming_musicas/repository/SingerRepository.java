@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SingerRepository extends JpaRepository<Singer, Long> {
-    Long id(Long id);
 }

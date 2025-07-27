@@ -44,22 +44,21 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="singer : ${singer}">
+    <tr th:each="singer : ${singers}">
       <td th:text="${singer.id}"></td>
       <td>
         <span th:text="${singer.lastName}"></span>
-        <span th:text=" "></span>
         <span th:text="${singer.firstName}"></span>
       </td>
       <td th:text="${singer.birthDate}"></td>
       <td>
         <!-- Edit Button (Only for Admins) -->
         <a sec:authorize="hasRole('ADMIN')"
-           th:href="@{/singer/edit/{id}(id=${singer.id})}"
+           th:href="@{/singers/edit/{id}(id=${singer.id})}"
            class="btn btn-warning btn-sm">Edit</a>
         <!-- Delete Button (Only for Admins) -->
         <a sec:authorize="hasRole('ADMIN')"
-           th:href="@{/singer/delete/{id}(id=${singer.id})}"
+           th:href="@{/singers/delete/{id}(id=${singer.id})}"
            class="btn btn-danger btn-sm"
            onclick="return confirm('Are you sure you want to delete this singer?');">Delete</a>
       </td>

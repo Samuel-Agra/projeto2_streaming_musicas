@@ -9,28 +9,28 @@ import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "SINGER")
+@Table(name = "singer")
 public class Singer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "SINGER_ID", nullable = false)
+    @Column(name = "singer_id", nullable = false)
     private Long id;
 
     @Size(max = 250)
     @NotBlank
     @NotNull
-    @Column(name = "FIRST_NAME", nullable = false, length = 250)
+    @Column(name = "first_name", nullable = false, length = 250)
     private String firstName;
 
     @Size(max = 250)
     @NotBlank
     @NotNull
-    @Column(name = "LAST_NAME", nullable = false, length = 250)
+    @Column(name = "last_name", nullable = false, length = 250)
     private String lastName;
 
     @Past ( message = "Date must be a past date" )
     @NotNull
-    @Column(name = "BIRTH_DATE", nullable = false)
+    @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
 
     public Singer(final String firstName, final String lastName, final LocalDate birthDate) {

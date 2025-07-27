@@ -3,7 +3,7 @@ services:
     image: 'mysql:8.1'
     container_name: db
     volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql # leia instructions.txt
+#      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
       - vol_music:/var/lib/mysql
     environment:
       - 'MYSQL_DATABASE=db_music'

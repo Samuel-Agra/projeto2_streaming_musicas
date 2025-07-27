@@ -20,8 +20,8 @@ public class SingerController {
     @Autowired
     private final SingerService singerService;
 
-    public SingerController(SingerService singerService, SingerService singerService1) {
-        this.singerService = singerService1;
+    public SingerController(SingerService singerService) {
+        this.singerService = singerService;
     }
 
     @GetMapping ( "/login" )
@@ -30,9 +30,14 @@ public class SingerController {
     }
 
     @GetMapping ( "/singers" )
-    public String singers(Model model) {
+    public String listSingers(Model model) {
         model.addAttribute("singers", singerService.findAll());
         return "singers";
+    }
+
+    @ModelAttribute( "singer" )
+    private Singer bindBookObjectToHtmlForm() {
+        return new Singer();
     }
 
     @GetMapping ( "/singers/add" )
@@ -56,22 +61,22 @@ public class SingerController {
         return "redirect:/singers";
     }
 
-    @GetMapping ( "singer/edit/{id}" )
-    public String editSinger(@PathVariable Long id, Model model) {
+    @GetMapping ( "/singers/edit/{id}" )
+    public String editSinger(@PathVariable("id") Long id, Model model) {
         Optional<Singer> singer = singerService.findById( id );
         if (singer.isPresent()) {
             model.addAttribute("singer", singer.get());
-            return "editSinger";
+            return "edit_singer";
         }
         return "redirect:/singers";
     }
 
-    @PostMapping ( "/singer/edit/{id}" )
-    public String updateBook(@PathVariable("id") Long id,
+    @PostMapping ( "/singers/edit/{id}" )
+    public String updateSinger(@PathVariable("id") Long id,
                              @Valid @ModelAttribute("singer") Singer singer,
                              BindingResult result) {
         if (result.hasErrors()) {
-            return "editSinger";
+            return "edit_singer";
         }
 
         Optional<Singer> existingSinger = singerService.findById(id);
@@ -82,7 +87,7 @@ public class SingerController {
             updatedSinger.setBirthDate(singer.getBirthDate());
             singerService.addSinger(updatedSinger);
         }
-        return "redirect:/singer";
+        return "redirect:/singers";
     }
 
 }

@@ -23,8 +23,8 @@ public class SingerService {
         return singerRepository.findAll();
     }
 
-    public Optional<Singer> findById(Long id) {
-        return singerRepository.findById(id);
+    public Optional<Singer> findById(Long aLong) {
+        return singerRepository.findById(aLong);
     }
 
     @Transactional

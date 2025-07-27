@@ -26,30 +26,38 @@
              th:classappend="${#fields.hasErrors('firstName')} ? 'is-invalid' : (${singer.firstName != null} ? 'is-valid' : '')"
              required>
       <!-- Error message for invalid input -->
-      <div class="invalid-feedback" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
+      <div class="invalid-feedback" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name has error</div>
       <!-- Valid feedback for correct input -->
       <div class="valid-feedback" th:unless="${#fields.hasErrors('firstName')}" th:if="${singer.firstName != null}">Looks good!</div>
     </div>
+
     <!-- Singer Last Name Field -->
     <div class="mb-3">
       <label class="form-label">Last Name</label>
-      <input type="text" class="form-control"
-             th:field="*{lastName}"
-             th:classappend="${#fields.hasErrors('lastName')} ? 'is-invalid' : (${singer.lastName != null} ? 'is-valid' : '')"
-             required>
+      <label>
+        <input type="text" class="form-control"
+               th:field="*{lastName}"
+               th:classappend="${#fields.hasErrors('lastName')} ? 'is-invalid' : (${singer.lastName != null} ? 'is-valid' : '')"
+               required>
+      </label>
       <!-- Error message for invalid input -->
-      <div class="invalid-feedback" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+      <div class="invalid-feedback" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name has error</div>
       <!-- Valid feedback for correct input -->
       <div class="valid-feedback" th:unless="${#fields.hasErrors('lastName')}" th:if="${singer.lastName != null}">Looks good!</div>
     </div>
+
     <!-- Singer Birth Date Field -->
     <div class="mb-3">
       <label class="form-label">Birth Date</label>
-      <input type="date" step="1" class="form-control"
-             th:field="*{birthDate}"
-             th:classappend="${#fields.hasErrors('birthDate')} ? 'is-invalid' : (${singer.birthDate != null} ? 'is-valid' : '')">
-      <!-- Error message for invalid input -->
-      <div class="invalid-feedback" th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}"></div>
+      <label>
+        <input type="date" step="1" class="form-control"
+               th:field="*{birthDate}"
+               th:classappend="${#fields.hasErrors('birthDate')} ? 'is-invalid' : (${singer.birthDate != null} ? 'is-valid' : '')">
+      </label>
+      <!-- invalid format -->
+      <div class="invalid-feedback"
+           th:if="${#fields.hasErrors('birthDate')}"
+           th:errors="*{birthDate}">Invalid Format</div>
       <!-- Valid feedback for correct input -->
       <div class="valid-feedback" th:unless="${#fields.hasErrors('birthDate')}" th:if="${singer.birthDate != null}">Looks good!</div>
     </div>
