@@ -32,8 +32,14 @@ public class SingerRepositoryUsingSpringTestContainersSupportTest {
     @Autowired
     private TestEntityManager entityManager;
 
-    //@Test
-    //@DisplayName()
+    @Test
+    @DisplayName("Given a empty repository, when findAll(), Must be empty")
+    void testingEmptyRepository() {
+        List<Singer> singers = singerRepository.findAll();
+        assertThat(singers)
+                .as("Should be empty")
+                .isEmpty();
+    }
 
     @Test
     @DisplayName("Given singers, when List<Singer> findAll(), return all that singers")
@@ -60,9 +66,9 @@ public class SingerRepositoryUsingSpringTestContainersSupportTest {
     @DisplayName("Given an empty repository, when addSinger, return a singer")
     void testing_SingerAddSinger_MustReturnSinger() {
         //Given an empty repository
-        Singer singer = new Singer("James","Hetfield", LocalDate.of(1963, 8, 3));
 
         //When addSinger
+        Singer singer = new Singer("James","Hetfield", LocalDate.of(1963, 8, 3));
         singerRepository.save(singer);
 
         //Then must have that singer
@@ -84,7 +90,7 @@ public class SingerRepositoryUsingSpringTestContainersSupportTest {
     @Test
     @DisplayName("Given a repository with singer, when addSinger, return all singers")
     void testing_SingerAddSingerWithSinger_MustReturnSinger() {
-        //Given an empty repository
+        //Given a repository
         Singer singer = new Singer("Axl","Rose", LocalDate.of(1962, 2, 6));
         entityManager.persist(singer);
         entityManager.flush();
@@ -110,8 +116,59 @@ public class SingerRepositoryUsingSpringTestContainersSupportTest {
     }
 
     @Test
-    @DisplayName("Given a singer with repository of 1, when DeleteSinger, then must return empty")
-    void testing_deleteSinger_MustReturnNoSinger() {
+    @DisplayName("Given a repository, when edit a singer, then must be only the edited singer")
+    void testing_SingerEditSinger_MustReturnEditedSinger() {
+        //Given a repository
+        Singer singer = new Singer("Axl","Rose", LocalDate.of(1962, 2, 6));
+        entityManager.persist(singer);
+        entityManager.flush();
+        assertThat(singer.getFirstName())
+                .isEqualTo("Axl");
+        assertThat(singer.getLastName())
+                .isEqualTo("Rose");
+        assertThat(singer.getBirthDate())
+                .isEqualTo(LocalDate.of(1962, 2, 6));
 
+        List<Singer> singers = entityManager
+                .getEntityManager()
+                .createQuery("SELECT s FROM Singer s", Singer.class)
+                .getResultList();
+        //When edit a singer
+        Singer singer1 = singers.getFirst();
+        singer1.setFirstName("James");
+        singer1.setLastName("Hetfield");
+        singer1.setBirthDate(LocalDate.of(1963, 8, 3));
+        singerRepository.save(singer);
+
+        //then the singer must be new one
+        assertThat(singers)
+                .hasSize(1);
+        assertThat(singers.getFirst().getFirstName())
+                .isEqualTo("James");
+        assertThat(singers.getFirst().getLastName())
+                .isEqualTo("Hetfield");
+        assertThat(singers.getFirst().getBirthDate())
+                .isEqualTo(LocalDate.of(1962, 8, 3));
+    }
+
+    @Test
+    @DisplayName("Given a singer with repository of 1, when DeleteSingerById, then must return empty")
+    void testing_deleteSinger_MustReturnNoSinger() {
+        //Given a singer with repository of 1
+        Singer singer = new Singer("James","Hetfield", LocalDate.of(1963, 8, 3));
+        entityManager.persist(singer);
+        entityManager.flush();
+        List<Singer> singers = singerRepository.findAll();
+        assertThat(singers)
+                .as("findAll returns 1 Singer")
+                .hasSize(1);
+        //when DeleteSingerById
+        singerRepository.delete(singer);
+
+        //Then must return empty
+        singers = singerRepository.findAll();
+        assertThat(singers)
+                .as("findAll returns empty list")
+                .isEmpty();
     }
 }
