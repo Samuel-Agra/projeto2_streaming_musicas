@@ -6,10 +6,10 @@ services:
 #      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
       - vol_music:/var/lib/mysql
     environment:
-      - 'MYSQL_DATABASE=db_music'
-      - 'MYSQL_ROOT_PASSWORD=root123'
-      - 'MYSQL_USER=usuario'
-      - 'MYSQL_PASSWORD=usuario123'
+      - 'MYSQL_DATABASE=${MYSQL_DATABASE}'
+      - 'MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}'
+      - 'MYSQL_USER=${MYSQL-USER}'
+      - 'MYSQL_PASSWORD=${MYSQL_PASSWORD}'
     ports:
       - '3306:3306'
 volumes:
